@@ -1,1 +1,63 @@
-
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="Panel de análisis académico de RetailNow con NumPy y Pandas: ventas, inventario y satisfacción de clientes.">
+  <title>RetailNow | Análisis de tiendas</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0b1020;--surface:#121a2d;--surface2:#18233b;--ink:#f3f6ff;--muted:#a2aec8;--line:#273552;--teal:#6ee7d2;--blue:#88a8ff;--amber:#ffd37c;--rose:#ff8fa7;--radius:22px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 88% 0%,#1b2d53 0,transparent 36%),var(--bg);font:16px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink)}a{color:inherit} .wrap{width:min(1120px,calc(100% - 40px));margin:auto}.nav{display:flex;align-items:center;justify-content:space-between;padding:24px 0}.brand{display:flex;align-items:center;gap:12px;font-weight:750;letter-spacing:.02em}.mark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(140deg,var(--teal),#87b9ff);color:#0a1223;font-weight:900}.navlinks{display:flex;gap:20px;color:var(--muted);font-size:14px}.navlinks a{text-decoration:none}.navlinks a:hover{color:var(--ink)}.hero{padding:66px 0 44px;display:grid;grid-template-columns:1.2fr .8fr;gap:50px;align-items:center}.eyebrow{color:var(--teal);font-size:12px;text-transform:uppercase;letter-spacing:.16em;font-weight:800}.hero h1{font-size:clamp(40px,6vw,68px);line-height:1.02;letter-spacing:-.055em;margin:18px 0}.hero p{color:var(--muted);font-size:18px;max-width:650px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{display:inline-flex;align-items:center;gap:9px;padding:12px 17px;border:1px solid var(--line);border-radius:12px;background:var(--surface);text-decoration:none;font-weight:700;font-size:14px}.btn.primary{background:var(--teal);border-color:var(--teal);color:#071421}.btn:hover{transform:translateY(-1px);filter:brightness(1.08)}.hero-art{padding:25px;border:1px solid #344564;background:linear-gradient(145deg,#192642,#11192b);border-radius:26px;box-shadow:0 22px 70px #0005;min-height:250px;position:relative;overflow:hidden}.hero-art:after{content:"";position:absolute;width:240px;height:240px;right:-80px;top:-110px;border-radius:50%;background:#6ee7d21a;filter:blur(2px)}.art-top{display:flex;justify-content:space-between;color:var(--muted);font-size:13px}.big-number{font-size:46px;font-weight:800;letter-spacing:-.04em;margin:28px 0 0}.big-number span{color:var(--teal)}.art-caption{color:var(--muted);font-size:13px}.spark{height:76px;display:flex;align-items:end;gap:7px;margin-top:17px}.spark i{display:block;flex:1;border-radius:5px 5px 1px 1px;background:linear-gradient(0deg,#5dd9c7,#7da5ff);opacity:.86}.section{padding:38px 0}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:19px}.section h2{font-size:24px;letter-spacing:-.03em;margin:0}.section-head p{margin:4px 0 0;color:var(--muted);font-size:14px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:linear-gradient(155deg,var(--surface),#101729);border:1px solid var(--line);border-radius:var(--radius);padding:20px}.card-label{font-size:13px;color:var(--muted)}.card-value{font-size:30px;font-weight:800;letter-spacing:-.04em;margin:8px 0}.card-note{font-size:12px;color:var(--muted)}.card-note.good{color:var(--teal)}.card-note.warn{color:var(--amber)}.columns{display:grid;grid-template-columns:1.2fr .8fr;gap:15px}.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px}.chart{display:grid;gap:15px;margin-top:22px}.bar-row{display:grid;grid-template-columns:68px 1fr 78px;gap:12px;align-items:center;font-size:13px}.bar-track{height:13px;border-radius:99px;background:#202b43;overflow:hidden}.bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--teal),var(--blue))}.bar-value{text-align:right;font-variant-numeric:tabular-nums;color:#d9e4ff}.note{border-left:3px solid var(--amber);padding:12px 14px;background:#ffd37c0d;border-radius:0 12px 12px 0;color:var(--muted);font-size:14px;margin-top:18px}.store-badge{display:inline-flex;border-radius:99px;padding:5px 10px;background:#ff8fa71a;color:var(--rose);font-size:12px;font-weight:800}.statline{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}.statline:last-child{border:0}.statline span:last-child{font-weight:700}.resources{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.resource{padding:20px;border:1px solid var(--line);border-radius:18px;background:var(--surface);text-decoration:none}.resource:hover{border-color:#5b729f}.resource small{display:block;color:var(--muted);margin-top:8px}.resource strong{font-size:15px}.foot{border-top:1px solid var(--line);color:var(--muted);font-size:13px;padding:26px 0;margin-top:30px}.foot .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}.muted{color:var(--muted)}
+    @media(max-width:780px){.hero{grid-template-columns:1fr;padding-top:42px;gap:28px}.hero-art{min-height:220px}.grid{grid-template-columns:repeat(2,1fr)}.columns{grid-template-columns:1fr}.resources{grid-template-columns:1fr}.navlinks{gap:12px}.section-head{align-items:start;flex-direction:column}}
+    @media(max-width:430px){.wrap{width:min(100% - 28px,1120px)}.navlinks a:nth-child(2){display:none}.hero h1{font-size:42px}.grid{gap:9px}.card{padding:15px}.card-value{font-size:25px}.bar-row{grid-template-columns:55px 1fr 68px;gap:8px}}
+  </style>
+</head>
+<body>
+  <header class="wrap nav">
+    <a class="brand" href="#inicio" aria-label="RetailNow, inicio"><span class="mark">R</span><span>RetailNow <span class="muted">/ Lab</span></span></a>
+    <nav class="navlinks" aria-label="Navegación principal"><a href="#resultados">Resultados</a><a href="#alerta">Hallazgo</a><a href="#recursos">Archivos</a></nav>
+  </header>
+  <main>
+    <section class="wrap hero" id="inicio">
+      <div><div class="eyebrow">Proyecto · NumPy + Pandas</div><h1>Una mirada clara al rendimiento de tiendas.</h1><p>Exploración de ventas, rotación de inventario y satisfacción para apoyar decisiones de RetailNow, una cadena minorista ficticia.</p><div class="actions"><a class="btn primary" href="analisis_red_tiendas.ipynb" download>↓ Abrir notebook</a><a class="btn" href="main.py" download>Ver main.py ↗</a></div></div>
+      <aside class="hero-art" aria-label="Ingresos totales observados"><div class="art-top"><span>Ingresos registrados</span><span>5 tiendas</span></div><div class="big-number">$50.500 <span>↗</span></div><div class="art-caption">Total de ingresos en el conjunto de ventas</div><div class="spark" aria-hidden="true"><i style="height:27%"></i><i style="height:61%"></i><i style="height:52%"></i><i style="height:79%"></i><i style="height:79%"></i><i style="height:94%"></i><i style="height:73%"></i><i style="height:100%"></i><i style="height:82%"></i><i style="height:88%"></i></div></aside>
+    </section>
+    <section class="wrap section" id="resultados"><div class="section-head"><div><h2>Resumen ejecutivo</h2><p>Indicadores calculados a partir de los CSV proporcionados.</p></div><span class="muted">RetailNow · muestra académica</span></div>
+      <div class="grid">
+        <article class="card"><div class="card-label">Ingresos totales</div><div class="card-value">$50.500</div><div class="card-note good">10 registros de venta</div></article>
+        <article class="card"><div class="card-label">Unidades vendidas</div><div class="card-value">250</div><div class="card-note">En las cinco tiendas</div></article>
+        <article class="card"><div class="card-label">Mediana por tienda</div><div class="card-value">$10.500</div><div class="card-note">Calculada con NumPy</div></article>
+        <article class="card"><div class="card-label">Satisfacción más baja</div><div class="card-value">55%</div><div class="card-note warn">Tienda 5 · revisar experiencia</div></article>
+      </div>
+    </section>
+    <section class="wrap section columns">
+      <article class="panel"><div class="section-head"><div><h2>Ingresos por tienda</h2><p>La cifra combina cantidad vendida × precio unitario.</p></div></div>
+        <div class="chart" role="img" aria-label="Gráfico de ingresos por tienda">
+          <div class="bar-row"><span>Tienda 1</span><div class="bar-track"><div class="bar-fill" style="width:38.5%"></div></div><span class="bar-value">$5.000</span></div>
+          <div class="bar-row"><span>Tienda 2</span><div class="bar-track"><div class="bar-fill" style="width:80.8%"></div></div><span class="bar-value">$10.500</span></div>
+          <div class="bar-row"><span>Tienda 3</span><div class="bar-track"><div class="bar-fill" style="width:69.2%"></div></div><span class="bar-value">$9.000</span></div>
+          <div class="bar-row"><span>Tienda 4</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-value">$13.000</span></div>
+          <div class="bar-row"><span>Tienda 5</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-value">$13.000</span></div>
+        </div>
+      </article>
+      <article class="panel" id="alerta"><div class="section-head"><div><h2>Foco de mejora</h2><p>Combinar satisfacción y resultados operativos.</p></div></div>
+        <span class="store-badge">ATENCIÓN · TIENDA 5</span>
+        <div class="statline"><span>Satisfacción</span><span>55%</span></div><div class="statline"><span>Ingresos</span><span>$13.000</span></div><div class="statline"><span>Unidades</span><span>50</span></div>
+        <div class="note">Revisar comentarios de clientes, reforzar la atención y comprobar disponibilidad y reposición. Volver a medir satisfacción y ventas después de aplicar cambios.</div>
+      </article>
+    </section>
+    <section class="wrap section" id="recursos"><div class="section-head"><div><h2>Archivos del proyecto</h2><p>Notebook, código y datos utilizados en el análisis.</p></div></div>
+      <div class="resources">
+        <a class="resource" href="analisis_red_tiendas.ipynb" download><strong>📓 Notebook de análisis</strong><small>Desarrollo paso a paso con Pandas y NumPy.</small></a>
+        <a class="resource" href="main.py" download><strong>🐍 Script principal</strong><small>Ejecuta el análisis desde Python.</small></a>
+        <a class="resource" href="README.md"><strong>📄 Guía del proyecto</strong><small>Instalación, ejecución y estructura.</small></a>
+        <a class="resource" href="sales.csv" download><strong>↗ sales.csv</strong><small>Registros de ventas.</small></a>
+        <a class="resource" href="inventories.csv" download><strong>▦ inventories.csv</strong><small>Stock disponible por tienda y producto.</small></a>
+        <a class="resource" href="satisfaction.csv" download><strong>☆ satisfaction.csv</strong><small>Evaluaciones de satisfacción.</small></a>
+      </div>
+    </section>
+  </main>
+  <footer class="foot"><div class="wrap"><span>RetailNow · Trabajo académico de análisis de datos</span><span>Hecho con Python, Pandas y NumPy · <a href="https://github.com/Ricardo0974/retailnow-analisis">GitHub ↗</a></span></div></footer>
+</body>
+</html>
